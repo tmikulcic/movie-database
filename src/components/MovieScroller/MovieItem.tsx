@@ -11,7 +11,7 @@ const MovieItem = ({ movie }: any) => {
         width={300}
         height={100}
       />
-      <p className='w-[1000px] text-2xl'>{movie.title || movie.name}</p>
+      <p className='w-[300px] text-2xl text-wrap'>{movie.title || movie.name}</p>
     </Link>
   );
 };

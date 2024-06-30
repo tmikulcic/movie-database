@@ -1,5 +1,6 @@
-import MovieItem from '@/components/movieItem';
+import MovieItem from '@/components/MovieScroller/MovieItem';
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchLatestMovies } from '../lib/api';
+import MovieScroller from '@/components/MovieScroller/MovieScroller';
 
 const HomePage = async () => {
   let trendingMovies = [];
@@ -29,30 +30,9 @@ const HomePage = async () => {
 
   return (
     <main className='flex flex-col mx-auto'>
-      <section className='ml-24 mb-8'>
-        <h2 className='text-2xl font-bold my-4'>Trending Movies</h2>
-        <div className='flex gap-8 '>
-          {trendingMovies.map((movie: any) => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))}
-        </div>
-      </section>
-      <section className='ml-24 mb-8'>
-        <h2 className='text-2xl font-bold my-4'>Top Rated Movies</h2>
-        <div className='flex gap-8 '>
-          {topRatedMovies.map((movie: any) => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))}
-        </div>
-      </section>
-      <section className='ml-24 mb-8'>
-        <h2 className='text-2xl font-bold my-4'>Latest Movie</h2>
-        <div className='flex gap-8'>
-          {latestMovies.map((movie: any) => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))}
-        </div>
-      </section>
+      <MovieScroller title='Trending Movies' movieList={trendingMovies} />
+      <MovieScroller title='Top Rated Movies' movieList={topRatedMovies} />
+      <MovieScroller title='Latest Movie' movieList={latestMovies} />
     </main>
   );
 };
