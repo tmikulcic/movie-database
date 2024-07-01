@@ -29,9 +29,9 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
 
   return (
     <section className='mb-8'>
-      <h2 className='my-4 ml-36 text-2xl font-bold w-full'>{title}</h2>
+      <h2 className='my-4 ml-36 text-2xl font-bold'>{title}</h2>
       <div className='relative flex gap-8 items-center'>
-        <div className='flex items-center m-4 hover:bg-gray-300  hover:rounded-full'>
+        <div className='flex items-center hover:bg-gray-300  hover:rounded-full'>
           <MdChevronLeft className={arrowStyle} onClick={() => handleScroll('left')} size={arrowSize} />
         </div>
         <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar'>

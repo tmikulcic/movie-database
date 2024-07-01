@@ -1,4 +1,3 @@
-import MovieItem from '@/components/MovieScroller/MovieItem';
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchLatestMovies } from '../lib/api';
 import MovieScroller from '@/components/MovieScroller/MovieScroller';
 
@@ -25,14 +24,14 @@ const HomePage = async () => {
     console.error('Failed to fetch latest movies:', error);
   }
 
-  //console.log('Trending Movies:', trendingMovies);
-  console.log('Latest Movies:', latestMovies);
+  console.log('Trending Movies:', trendingMovies);
+  // console.log('Latest Movies:', latestMovies);
 
   return (
     <main className='flex flex-col mx-auto'>
       <MovieScroller title='Trending Movies' movieList={trendingMovies} />
       <MovieScroller title='Top Rated Movies' movieList={topRatedMovies} />
-      <MovieScroller title='Latest Movie' movieList={latestMovies} />
+      <MovieScroller title='Latest Movies' movieList={latestMovies} />
     </main>
   );
 };
