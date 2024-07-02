@@ -14,12 +14,6 @@ const MoviePage = async ({ params }: any) => {
     console.error('Failed to fetch requested movie', error);
   }
 
-  const handleFavorite = (): void => {
-    console.log('Favorite button clicked');
-  };
-
-  console.log('Movie:', movie);
-
   return (
     <main className='flex flex-col items-center justify-center'>
       <div className='relative flex justify-center md:flex-row shadow-xl rounded-xl bg-neutral-100 m-16'>

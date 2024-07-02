@@ -11,25 +11,23 @@ const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
 
   useEffect(() => {
     // Check if the current movieId is favorited
-    const favoriteMovieIds = JSON.parse(localStorage.getItem('favoriteMovieIds') || '[]');
-    setIsFavorite(favoriteMovieIds.includes(movieId));
+    const favoriteMoviesIds = JSON.parse(localStorage.getItem('favoriteMoviesIds') || '[]');
+    setIsFavorite(favoriteMoviesIds.includes(movieId));
   }, [movieId]);
 
   const handleFavorite = (): void => {
-    // Retrieve favorite movie IDs from localStorage
-    const favoriteMovieIds = JSON.parse(localStorage.getItem('favoriteMovieIds') || '[]');
+    const favoriteMoviesIds = JSON.parse(localStorage.getItem('favoriteMoviesIds') || '[]');
 
-    // Toggle favorite state
     if (isFavorite) {
-      // Remove movieId from favoriteMovieIds
-      const updatedFavoriteIds = favoriteMovieIds.filter((id: number) => id !== movieId);
-      localStorage.setItem('favoriteMovieIds', JSON.stringify(updatedFavoriteIds));
+      // Remove movieId from favoriteMoviesIds
+      const updatedFavoriteIds = favoriteMoviesIds.filter((id: number) => id !== movieId);
+      localStorage.setItem('favoriteMoviesIds', JSON.stringify(updatedFavoriteIds));
       setIsFavorite(false);
       console.log('Removed from favorites');
     } else {
-      // Add movieId to favoriteMovieIds
-      const updatedFavoriteIds = [...favoriteMovieIds, movieId];
-      localStorage.setItem('favoriteMovieIds', JSON.stringify(updatedFavoriteIds));
+      // Add movieId to favoriteMoviesIds
+      const updatedFavoriteIds = [...favoriteMoviesIds, movieId];
+      localStorage.setItem('favoriteMoviesIds', JSON.stringify(updatedFavoriteIds));
       setIsFavorite(true);
       console.log('Added to favorites');
     }
