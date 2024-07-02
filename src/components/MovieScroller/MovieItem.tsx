@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { IoStarSharp } from 'react-icons/io5';
 
 const MovieItem = ({ movie }: any) => {
   return (
@@ -12,6 +13,10 @@ const MovieItem = ({ movie }: any) => {
         height={100}
       />
       <p className='w-[300px] text-2xl text-wrap'>{movie.title || movie.name}</p>
+      <div className='flex items-center mt-2'>
+        <IoStarSharp size={30} color='#fbbf24' />
+        <p className='ml-1 text-xl'>{movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Rated'}</p>
+      </div>
     </Link>
   );
 };

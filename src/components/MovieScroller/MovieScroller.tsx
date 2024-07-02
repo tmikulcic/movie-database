@@ -35,7 +35,7 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
         <div className='flex items-center hover:bg-gray-300  hover:rounded-full'>
           <MdChevronLeft className={arrowStyle} onClick={() => handleScroll('left')} size={arrowSize} />
         </div>
-        <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar'>
+        <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'>
           {movieList.map((movie: any) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
