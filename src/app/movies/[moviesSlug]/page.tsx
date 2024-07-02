@@ -3,6 +3,7 @@ import { fetchMovieById } from '@/lib/api';
 import { getYearFromDate } from '@/utils/dateHelper';
 import { IoStarSharp } from 'react-icons/io5';
 import FavoriteButton from '@/components/MovieDetailsPage/FavoriteButton';
+import { Movie } from '@/types/types';
 
 const MoviePage = async ({ params }: any) => {
   const id = params.moviesSlug;

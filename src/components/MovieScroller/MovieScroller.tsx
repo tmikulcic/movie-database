@@ -4,10 +4,11 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import MovieItem from './MovieItem';
 import { useRef } from 'react';
+import { Movie } from '@/types/types';
 
 type MovieScrollerProps = {
   title: string;
-  movieList: any;
+  movieList: Movie[];
 };
 
 const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {

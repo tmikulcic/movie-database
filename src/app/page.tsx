@@ -1,31 +1,8 @@
-import { fetchTopRatedMovies, fetchTrendingMovies, fetchLatestMovies } from '../lib/api';
+import { getMoviesData } from '../utils/fetchData';
 import MovieScroller from '@/components/MovieScroller/MovieScroller';
 
 const HomePage = async () => {
-  let trendingMovies = [];
-  let latestMovies = [];
-  let topRatedMovies = [];
-
-  try {
-    trendingMovies = await fetchTrendingMovies();
-  } catch (error) {
-    console.error('Failed to fetch trending movies:', error);
-  }
-
-  try {
-    topRatedMovies = await fetchTopRatedMovies();
-  } catch (error) {
-    console.error('Failed to fetch trending movies:', error);
-  }
-
-  try {
-    latestMovies = await fetchLatestMovies();
-  } catch (error) {
-    console.error('Failed to fetch latest movies:', error);
-  }
-
-  console.log('Trending Movies:', trendingMovies);
-  // console.log('Latest Movies:', latestMovies);
+  const { trendingMovies, latestMovies, topRatedMovies } = await getMoviesData();
 
   return (
     <main className='flex flex-col mx-auto'>
