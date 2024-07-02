@@ -1,10 +1,9 @@
 'use client';
 
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-
-import MovieItem from './MovieItem';
 import { useRef } from 'react';
 import { Movie } from '@/types/types';
+import MovieItem from './MovieItem';
+import ArrowButton from './ArrowButton';
 
 type MovieScrollerProps = {
   title: string;
@@ -32,15 +31,13 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
     <section className='mb-8'>
       <h2 className='my-4 ml-28 text-2xl font-bold'>{title}</h2>
       <div className='relative flex gap-8 items-center'>
-        <div className='flex items-center hover:bg-gray-300  hover:rounded-full'>
-          <MdChevronLeft className={arrowStyle} onClick={() => handleScroll('left')} size={arrowSize} />
-        </div>
+        <ArrowButton direction='left' onClick={() => handleScroll('left')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
         <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'>
           {movieList.map((movie: any) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
         </div>
-        <MdChevronRight className={arrowStyle} onClick={() => handleScroll('right')} size={arrowSize} />
+        <ArrowButton direction='right' onClick={() => handleScroll('right')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
       </div>
     </section>
   );
