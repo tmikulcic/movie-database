@@ -78,12 +78,23 @@ export const fetchFavoriteMovies = async () => {
 export const fetchLatestMovies = async () => {
   const latestMovie = await fetchLatestMovie();
   const latestMovieId = latestMovie.id;
-
   const moviePromises = [];
+  let skipCounter = 0;
 
-  for (let i = 1; i <= 10; i++) {
-    const movieId = latestMovieId - i;
-    moviePromises.push(fetchMovieById(movieId));
+  for (let i = 1; moviePromises.length < 10 && i <= 10; i++) {
+    const movieId = latestMovieId - i - skipCounter;
+    try {
+      const movie = await fetchMovieById(movieId);
+      console.log(movie);
+      if (movie.adult) {
+        skipCounter++;
+        i--;
+        continue;
+      }
+      moviePromises.push(movie);
+    } catch (error) {
+      console.error(`Failed to fetch movie with id ${movieId}:`, error);
+    }
   }
 
   const previousMovies = await Promise.all(moviePromises);

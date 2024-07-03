@@ -6,7 +6,7 @@ import Image from 'next/image';
 const MovieImage = ({ src, alt, width, height, clickable }: { src: string; alt: string; width: number; height: number; clickable: boolean }) => {
   const [imageError, setImageError] = useState(false);
 
-  const imageClasses = clickable ? 'p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' : '';
+  const imageClasses = clickable ? 'p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' : 'rounded-bl-xl rounded-tl-xl';
 
   const errorClasses = `flex items-center justify-center bg-gray-200 ${
     clickable ? 'p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' : ''

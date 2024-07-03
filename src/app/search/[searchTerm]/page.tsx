@@ -3,7 +3,7 @@ import MovieItem from '@/components/MovieScroller/MovieItem';
 const SearchPage = async ({ params }: any) => {
   const searchTerm = params.searchTerm;
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTerm}&page=1&include_adult=false`
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTerm}&page=1&include_adult=false&language=en-US`
   );
 
   const data = await res.json();

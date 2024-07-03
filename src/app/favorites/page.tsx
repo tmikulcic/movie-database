@@ -24,7 +24,7 @@ const FavoritesPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className='text-center mt-64 text-3xl'>Loading favorites...</div>;
   }
 
   return (

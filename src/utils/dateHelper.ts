@@ -1,5 +1,5 @@
-export const getYearFromDate = (dateString: string): string => {
-  if (!dateString) {
+export const getYearFromDate = (dateString: string | null): string => {
+  if (!dateString || dateString === null) {
     return 'Year Unknown';
   }
 
