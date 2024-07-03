@@ -34,7 +34,10 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
         <div className='hidden lg:block'>
           <ArrowButton direction='left' onClick={() => handleScroll('left')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
         </div>
-        <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'>
+        <div
+          ref={sliderRef}
+          className='flex flex-col items-center sm:flex-row w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'
+        >
           {movieList.map((movie: any) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}

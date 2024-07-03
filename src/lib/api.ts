@@ -86,7 +86,7 @@ export const fetchLatestMovies = async () => {
     try {
       const movie = await fetchMovieById(movieId);
       console.log(movie);
-      if (movie.adult) {
+      if (movie.adult || movie.poster_path === null) {
         skipCounter++;
         i--;
         continue;
