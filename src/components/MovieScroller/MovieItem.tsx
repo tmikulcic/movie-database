@@ -4,7 +4,7 @@ import MovieImage from '../UI/MovieImage';
 
 const MovieItem = ({ movie }: any) => {
   return (
-    <Link className='w-[300px] max-w-[300px]' href={`/movies/${movie.id}`}>
+    <Link className='p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' href={`/movies/${movie.id}`}>
       <MovieImage
         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
         alt={movie.title ? movie.title : 'Title missing'}
@@ -12,11 +12,12 @@ const MovieItem = ({ movie }: any) => {
         height={450}
         clickable={true}
       />
-      <p className='w-[300px] text-2xl text-wrap mt-2'>{movie.title || movie.name}</p>
-      <div className='flex items-center mt-2'>
+
+      <div className='flex items-center my-1'>
         <IoStarSharp size={30} color='#fbbf24' />
         <p className='ml-1 text-xl'>{movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Rated'}</p>
       </div>
+      <p className='w-[300px] text-2xl overflow-hidden text-wrap '>{movie.title || movie.name}</p>
     </Link>
   );
 };

@@ -59,7 +59,7 @@ const Header = () => {
   };
 
   return (
-    <header className='flex flex-col lg:flex-row max-w-7xl mx-auto p-4 items-center text-nowrap relative'>
+    <header className='flex flex-col mx-auto p-4 lg:flex-row lg:max-w-7xl mt-2 items-center text-nowrap relative'>
       <h1 className='hidden md:text-xl lg:block lg:text-2xl'>Movie Application</h1>
       <SearchBar />
       <div className='flex mx-auto items-center mt-6 lg:mt-0'>

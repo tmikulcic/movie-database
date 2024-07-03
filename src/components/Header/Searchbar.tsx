@@ -99,10 +99,10 @@ const SearchBar = () => {
 
   return (
     <div className='relative' ref={searchBarRef}>
-      <form className='flex gap-4 mx-8 p-1 bg-neutral-100 border rounded-full' onSubmit={handleSubmit}>
+      <form className='flex gap-4 mx-8 bg-neutral-100 border rounded-full' onSubmit={handleSubmit}>
         <div className='flex p-1'>
           <input
-            className='rounded-full p-2 pl-6 mx-2 w-96'
+            className='rounded-full p-2 pl-6 mx-2 w-80 md:w-96'
             type='search'
             id='search'
             value={searchTerm}
