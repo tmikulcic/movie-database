@@ -37,7 +37,7 @@ const MoviesList = () => {
     } finally {
       setLoading(false);
     }
-  }, [loading, hasMore, page]); // Dependencies for useCallback
+  }, [loading, hasMore, page]);
 
   useEffect(() => {
     fetchMovies();
@@ -56,8 +56,8 @@ const MoviesList = () => {
 
   return (
     <main className='max-w-7xl mx-auto'>
-      <h2 className='my-4 text-2xl font-bold'>Most Watched Movies</h2>
-      <ul className='flex gap-4 flex-wrap'>
+      <h2 className='my-4 text-center text-3xl'>Most Watched Movies</h2>
+      <ul className='flex justify-center gap-4 flex-wrap'>
         {movies.map((movie) => (
           <MovieItem key={movie.id} movie={movie} />
         ))}

@@ -29,15 +29,19 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
 
   return (
     <section className='mb-8'>
-      <h2 className='my-4 ml-28 text-2xl font-bold'>{title}</h2>
+      <h2 className='my-4 text-center text-3xl'>{title}</h2>
       <div className='relative flex gap-8 items-center'>
-        <ArrowButton direction='left' onClick={() => handleScroll('left')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
+        <div className='hidden lg:block'>
+          <ArrowButton direction='left' onClick={() => handleScroll('left')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
+        </div>
         <div ref={sliderRef} className='flex w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'>
           {movieList.map((movie: any) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
         </div>
-        <ArrowButton direction='right' onClick={() => handleScroll('right')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
+        <div className='hidden lg:block'>
+          <ArrowButton direction='right' onClick={() => handleScroll('right')} arrowStyle={arrowStyle} arrowSize={arrowSize} />
+        </div>
       </div>
     </section>
   );
