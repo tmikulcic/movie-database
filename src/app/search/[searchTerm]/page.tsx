@@ -11,7 +11,7 @@ const SearchPage = async ({ params }: any) => {
   console.log(results);
 
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='max-w-8xl mx-auto'>
       {results && results.length !== 0 ? (
         <ul className='flex gap-4 flex-wrap'>
           {results.map((movie: any) => (

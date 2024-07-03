@@ -34,7 +34,7 @@ const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
   };
 
   return (
-    <button className='absolute bottom-4 right-4 bg-yellow-500 p-4 rounded-xl text-neutral-50' onClick={handleFavorite}>
+    <button className=' mt-1 bg-yellow-500 p-4 rounded-xl text-neutral-50' onClick={handleFavorite}>
       {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
     </button>
   );

@@ -36,7 +36,7 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
         </div>
         <div
           ref={sliderRef}
-          className='flex flex-col items-center md:items-start sm:flex-row w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'
+          className='flex flex-col items-center md:items-start sm:flex-row w-full h-full overflow-x-scroll overflow-y-hidden scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'
         >
           {movieList.map((movie: any) => (
             <MovieItem key={movie.id} movie={movie} />

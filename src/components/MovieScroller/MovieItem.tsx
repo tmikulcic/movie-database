@@ -4,7 +4,7 @@ import MovieImage from '../UI/MovieImage';
 
 const MovieItem = ({ movie }: any) => {
   return (
-    <Link className='p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' href={`/movies/${movie.id}`}>
+    <Link className='p-2 cursor-pointer hover:scale-105 hover:shadow-lg ease-in-out duration-300' href={`/movies/${movie.id}`}>
       <MovieImage
         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
         alt={movie.title ? movie.title : 'Title missing'}
