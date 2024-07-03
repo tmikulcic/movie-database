@@ -7,18 +7,19 @@ import Link from 'next/link';
 import { fetchFavoriteMovies } from '../../lib/api';
 import { useRouter } from 'next/navigation';
 import { Movie } from '@/types/types';
+import { getYearFromDate } from '@/utils/dateHelper';
 
 const Header = () => {
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
   const [favoritesVisible, setFavoritesVisible] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
-  const [arrowClicked, setArrowClicked] = useState(false); // Track if arrow button is clicked
+  const [arrowClicked, setArrowClicked] = useState(false);
   const router = useRouter();
   const favoritesRef = useRef<HTMLDivElement>(null);
 
   const handleFavoriteClick = () => {
     setFavoritesVisible(!favoritesVisible);
-    setArrowClicked(!arrowClicked); // Toggle arrowClicked state
+    setArrowClicked(!arrowClicked);
     if (!favoritesVisible) {
       fetchFavorites();
     }
@@ -35,11 +36,11 @@ const Header = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === 'Enter') {
-      handleFavoriteClick(); // Trigger toggle on Enter key press
+      handleFavoriteClick();
     } else if (event.key === 'ArrowDown') {
-      setFavoritesVisible(true); // Show favorites on ArrowDown key press
-      setArrowClicked(true); // Set arrow clicked to true when arrow key pressed
-      fetchFavorites(); // Fetch favorites when arrow is pressed
+      setFavoritesVisible(true);
+      setArrowClicked(true);
+      fetchFavorites();
     }
   };
 
@@ -53,7 +54,7 @@ const Header = () => {
   const handleClickOutside = (event: MouseEvent): void => {
     if (favoritesRef.current && !favoritesRef.current.contains(event.target as Node)) {
       setFavoritesVisible(false);
-      setArrowClicked(false); // Reset arrow clicked state when clicking outside
+      setArrowClicked(false);
     }
   };
 
@@ -63,11 +64,11 @@ const Header = () => {
       <SearchBar />
       <div className='flex ml-auto items-center'>
         <HeaderItem title='Home' url='/' />
-        <HeaderItem title='Browse' url='/movies' />
+        <HeaderItem title='Most Watched' url='/movies' />
         <div ref={favoritesRef} className='relative flex'>
           <HeaderItem title='Favorites' url='/favorites' />
           <div
-            className='relative uppercase mx-2 md:text-xl lg:text-3xl hover:text-amber-500'
+            className='relative ml-1 md:text-xl lg:text-3xl hover:text-amber-500 cursor-pointer'
             onClick={handleFavoriteClick}
             onKeyDown={handleKeyDown}
             tabIndex={0}
@@ -83,7 +84,8 @@ const Header = () => {
                   onMouseEnter={() => setHighlightedIndex(index)}
                 >
                   <Link className='text-wrap block' href={`/movies/${movie.id}`} onClick={() => setFavoritesVisible(false)}>
-                    {movie.title}
+                    <p>{movie.title}</p>
+                    <p>({getYearFromDate(movie.release_date)})</p>
                   </Link>
                 </li>
               ))}
