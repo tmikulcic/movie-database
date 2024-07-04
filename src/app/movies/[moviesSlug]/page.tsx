@@ -13,12 +13,12 @@ const MoviePage = async ({ params }: any) => {
   try {
     movie = (await fetchMovieById(id)) as Movie;
   } catch (error) {
-    console.error('Failed to fetch requested movie', error);
+    throw new Error('Failed to fetch requested movie');
   }
 
   return (
     <main className='flex flex-col items-center justify-center'>
-      <div className=' flex justify-center md:flex-row lg:shadow-xl lg:rounded-xl lg:bg-neutral-100 m-4 md:mx-8 lg:mx-64'>
+      <div className='flex justify-center md:flex-row lg:shadow-xl lg:rounded-xl lg:bg-neutral-100 m-4 md:mx-8 lg:mx-72'>
         <div className='hidden lg:block w-[700px]'>
           <MovieImage
             src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}

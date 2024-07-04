@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Movie } from '@/types/types';
 
 import { HiOutlineSearch } from 'react-icons/hi';
-import { getYearFromDate } from '@/utils/dateHelper';
+import { getFollowingYear, getYearFromDate } from '@/utils/dateHelper';
 
 const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
@@ -39,7 +39,10 @@ const SearchBar = () => {
   const fetchSearchResults = async (query: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`);
+      const yearRange = getFollowingYear();
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&primary_release_date.lte=${yearRange}`
+      );
       const data = await response.json();
       setSearchResults(data.results || []);
       setHighlightedIndex(-1);

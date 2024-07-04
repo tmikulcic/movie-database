@@ -21,13 +21,14 @@ const MovieImage = ({ src, alt, width, height, clickable }: { src: string; alt: 
         </div>
       ) : (
         <Image
-          className={`object-cover ${imageClasses}`}
+          className={`object-cover tansition-opacity opacity-0 duration-[1s] ${imageClasses}`}
           src={src}
           alt={alt}
           layout='fill'
           loading='lazy'
           objectFit='cover'
           onError={handleImageError}
+          onLoadingComplete={(image) => image.classList.remove('opacity-0')}
         />
       )}
     </div>

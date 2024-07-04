@@ -8,19 +8,19 @@ export const getMoviesData = async () => {
   try {
     trendingMovies = await fetchTrendingMovies();
   } catch (error) {
-    console.error('Failed to fetch trending movies:', error);
+    throw new Error('Failed to fetch trending movies');
   }
 
   try {
     topRatedMovies = await fetchTopRatedMovies();
   } catch (error) {
-    console.error('Failed to fetch top-rated movies:', error);
+    throw new Error('Failed to fetch top-rated movies');
   }
 
   try {
     latestMovies = await fetchLatestMovies();
   } catch (error) {
-    console.error('Failed to fetch latest movies:', error);
+    throw new Error('Failed to fetch latest movies');
   }
 
   return { trendingMovies, latestMovies, topRatedMovies };

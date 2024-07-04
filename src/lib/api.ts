@@ -1,59 +1,42 @@
 const API_KEY = process.env.MOVIE_API_KEY;
 const NEXT_PUBLIC_MOVIE_API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
-export const fetchTrendingMovies = async () => {
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}`);
+const fetchData = async (url: string) => {
+  const res = await fetch(url);
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error(`Failed to fetch data from ${url}`);
   }
 
+  return data;
+};
+
+export const fetchTrendingMovies = async () => {
+  const url = `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}`;
+  const data = await fetchData(url);
   return data.results;
 };
 
 export const fetchTopRatedMovies = async () => {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`);
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
+  const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
+  const data = await fetchData(url);
   return data.results;
 };
 
 export const fetchLatestMovie = async () => {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`);
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return data;
+  const url = `https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`;
+  return await fetchData(url);
 };
 
 export const fetchMovieById = async (id: number) => {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch movie');
-  }
-
-  return data;
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
+  return await fetchData(url);
 };
 
 export const fetchMovieByIdPublic = async (id: number) => {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${NEXT_PUBLIC_MOVIE_API_KEY}`);
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch movie');
-  }
-
-  return data;
+  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${NEXT_PUBLIC_MOVIE_API_KEY}`;
+  return await fetchData(url);
 };
 
 export const fetchFavoriteMovies = async () => {
@@ -70,8 +53,7 @@ export const fetchFavoriteMovies = async () => {
     const movies = await Promise.all(fetchPromises);
     return movies;
   } catch (error) {
-    console.error('Failed to fetch favorite movies:', error);
-    throw error;
+    throw new Error('Failed to fetch favorite movies');
   }
 };
 
@@ -85,7 +67,6 @@ export const fetchLatestMovies = async () => {
     const movieId = latestMovieId - i - skipCounter;
     try {
       const movie = await fetchMovieById(movieId);
-      console.log(movie);
       if (movie.adult || movie.poster_path === null) {
         skipCounter++;
         i--;
@@ -97,7 +78,5 @@ export const fetchLatestMovies = async () => {
     }
   }
 
-  const previousMovies = await Promise.all(moviePromises);
-
-  return previousMovies;
+  return await Promise.all(moviePromises);
 };
