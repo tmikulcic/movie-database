@@ -19,7 +19,7 @@ const MoviePage = async ({ params }: any) => {
   return (
     <main className='flex flex-col items-center justify-center'>
       <div className='flex justify-center md:flex-row lg:shadow-xl lg:rounded-xl lg:bg-neutral-100 m-4 md:mx-8 lg:mx-72'>
-        <div className='hidden lg:block w-[700px]'>
+        <div className='hidden lg:block'>
           <MovieImage
             src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
             alt={movie?.title ? movie.title : 'Title missing'}
