@@ -1,8 +1,10 @@
-import { getMoviesData } from '../utils/fetchData';
+import { fetchLatestMovies, fetchMovies } from '@/lib/api';
 import MovieScroller from '@/components/MovieScroller/MovieScroller';
 
 const HomePage = async () => {
-  const { trendingMovies, latestMovies, topRatedMovies } = await getMoviesData();
+  const trendingMovies = await fetchMovies('trending');
+  const topRatedMovies = await fetchMovies('top rated');
+  const latestMovies = await fetchLatestMovies();
 
   return (
     <main className='flex flex-col mx-auto'>

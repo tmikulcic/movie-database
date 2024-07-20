@@ -2,9 +2,9 @@
 
 const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
-import MovieItem from '@/components/MovieScroller/MovieItem';
-import { Movie } from '@/types/types';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { type Movie } from '@/types/types';
+import MovieItem from '@/components/MovieScroller/MovieItem';
 
 const MoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
