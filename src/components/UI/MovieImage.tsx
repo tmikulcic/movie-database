@@ -3,7 +3,21 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const MovieImage = ({ src, alt, width, height, clickable }: { src: string; alt: string; width: number; height: number; clickable: boolean }) => {
+const MovieImage = ({
+  src,
+  alt,
+  width,
+  height,
+  clickable,
+  isPriority,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  clickable: boolean;
+  isPriority?: boolean;
+}) => {
   const [imageError, setImageError] = useState(false);
 
   const imageClasses = clickable ? '' : 'rounded-bl-xl rounded-tl-xl';
@@ -11,6 +25,10 @@ const MovieImage = ({ src, alt, width, height, clickable }: { src: string; alt: 
 
   const handleImageError = () => {
     setImageError(true);
+  };
+
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.classList.remove('opacity-0');
   };
 
   return (
@@ -24,11 +42,12 @@ const MovieImage = ({ src, alt, width, height, clickable }: { src: string; alt: 
           className={`object-cover tansition-opacity opacity-0 duration-[1s] ${imageClasses}`}
           src={src}
           alt={alt}
-          layout='fill'
+          sizes='max-width: 768px'
+          fill
           loading='lazy'
-          objectFit='cover'
           onError={handleImageError}
-          onLoadingComplete={(image) => image.classList.remove('opacity-0')}
+          onLoad={handleImageLoad}
+          priority={isPriority}
         />
       )}
     </div>
