@@ -1,12 +1,12 @@
 'use client';
 
+import { type Movie } from '@/types/types';
+
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-import { Movie } from '@/types/types';
 import { fetchFavoriteMovies } from '../../lib/api';
 import { getYearFromDate } from '@/utils/dateHelper';
-
 import HeaderItem from './HeaderItem';
 import SearchBar from './Searchbar';
 

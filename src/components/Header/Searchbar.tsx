@@ -1,9 +1,10 @@
 'use client';
 
+import { type Movie } from '@/types/types';
+
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Movie } from '@/types/types';
 
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getFollowingYear, getYearFromDate } from '@/utils/dateHelper';

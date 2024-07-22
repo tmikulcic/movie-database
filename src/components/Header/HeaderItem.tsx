@@ -6,7 +6,7 @@ type HeaderItemProps = {
   isHoverable?: boolean;
 };
 
-const HeaderItem = ({ title, url, isHoverable = false }: HeaderItemProps) => {
+const HeaderItem: React.FC<HeaderItemProps> = ({ title, url, isHoverable = false }) => {
   const linkClass = `text-2xl hover:text-amber-500 ${isHoverable ? 'relative' : 'ml-4'}`;
 
   return (

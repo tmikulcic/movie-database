@@ -3,21 +3,16 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const MovieImage = ({
-  src,
-  alt,
-  width,
-  height,
-  clickable,
-  isPriority,
-}: {
+type MovieImageProps = {
   src: string;
   alt: string;
   width: number;
   height: number;
   clickable: boolean;
   isPriority?: boolean;
-}) => {
+};
+
+const MovieImage: React.FC<MovieImageProps> = ({ src, alt, width, height, clickable, isPriority }) => {
   const [imageError, setImageError] = useState(false);
 
   const imageClasses = clickable ? '' : 'rounded-bl-xl rounded-tl-xl';

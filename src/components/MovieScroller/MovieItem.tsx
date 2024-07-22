@@ -1,8 +1,15 @@
+import { type Movie } from '@/types/types';
+
 import Link from 'next/link';
+
 import { IoStarSharp } from 'react-icons/io5';
 import MovieImage from '../UI/MovieImage';
 
-const MovieItem = ({ movie }: any) => {
+type MovieItemsProps = {
+  movie: Movie;
+};
+
+const MovieItem: React.FC<MovieItemsProps> = ({ movie }) => {
   return (
     <Link className='p-2 cursor-pointer hover:scale-105 hover:shadow-lg ease-in-out duration-300' href={`/movies/${movie.id}`}>
       <MovieImage

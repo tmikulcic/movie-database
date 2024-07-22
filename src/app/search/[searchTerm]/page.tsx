@@ -1,7 +1,13 @@
+import { type Movie } from '@/types/types';
+
 import MovieItem from '@/components/MovieScroller/MovieItem';
 import { getFollowingYear } from '@/utils/dateHelper';
 
-const SearchPage = async ({ params }: any) => {
+type SearchPageProps = {
+  searchTerm: string;
+};
+
+const SearchPage = async ({ params }: { params: SearchPageProps }) => {
   const searchTerm = params.searchTerm;
   const nextYear = getFollowingYear();
 
@@ -10,7 +16,7 @@ const SearchPage = async ({ params }: any) => {
   );
 
   const data = await res.json();
-  const results = data.results;
+  const results: Movie[] = data.results;
   console.log(results);
 
   return (
@@ -20,7 +26,7 @@ const SearchPage = async ({ params }: any) => {
       </h2>
       {results && results.length !== 0 ? (
         <ul className='flex gap-4 flex-wrap justify-center'>
-          {results.map((movie: any) => (
+          {results.map((movie) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
         </ul>

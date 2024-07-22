@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { fetchFavoriteMovies } from '../../lib/api';
 import MovieItem from '@/components/MovieScroller/MovieItem';
 

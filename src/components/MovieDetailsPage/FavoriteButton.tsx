@@ -6,7 +6,7 @@ type FavoriteButtonProps = {
   movieId: number;
 };
 
-const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
+const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   useEffect(() => {

@@ -1,20 +1,18 @@
-import Image from 'next/image';
+import { type Movie } from '@/types/types';
+
 import { fetchMovieById } from '@/lib/api';
 import { getYearFromDate } from '@/utils/dateHelper';
 import { IoStarSharp } from 'react-icons/io5';
 import FavoriteButton from '@/components/MovieDetailsPage/FavoriteButton';
-import { Movie } from '@/types/types';
 import MovieImage from '@/components/UI/MovieImage';
 
-const MoviePage = async ({ params }: any) => {
-  const id = params.moviesSlug;
-  let movie: any = {};
+type MoviePageProps = {
+  moviesSlug: number;
+};
 
-  try {
-    movie = (await fetchMovieById(id)) as Movie;
-  } catch (error) {
-    throw new Error('Failed to fetch requested movie');
-  }
+const MoviePage = async ({ params }: { params: MoviePageProps }) => {
+  const id = params.moviesSlug;
+  let movie: Movie = await fetchMovieById(id);
 
   return (
     <main className='flex flex-col items-center justify-center'>
@@ -35,7 +33,7 @@ const MoviePage = async ({ params }: any) => {
           <div>
             {movie?.genres && movie.genres.length > 0 && (
               <div className='mt-1'>
-                <span className='inline-block text-lg text-gray-700'>{movie.genres.map((genre: any) => genre.name).join(', ')}</span>
+                <span className='inline-block text-lg text-gray-700'>{movie.genres.map((genre) => genre.name).join(', ')}</span>
               </div>
             )}
             <div className='flex items-center mt-2'>

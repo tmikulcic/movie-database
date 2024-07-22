@@ -12,6 +12,7 @@ export type Movie = {
   homepage: string;
   id: number;
   imdb_id: string;
+  name: string;
   origin_country: string[];
   original_language: string;
   original_title: string;

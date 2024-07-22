@@ -1,10 +1,12 @@
 'use client';
 
-const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
+import { type Movie } from '@/types/types';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { type Movie } from '@/types/types';
+
 import MovieItem from '@/components/MovieScroller/MovieItem';
+
+const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
 const MoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -22,8 +24,8 @@ const MoviesList = () => {
       const data = await response.json();
 
       if (Array.isArray(data.results)) {
-        const newMovies = data.results.filter((movie: any) => !fetchedMovieIds.current.has(movie.id));
-        newMovies.forEach((movie: any) => fetchedMovieIds.current.add(movie.id));
+        const newMovies: Movie[] = data.results.filter((movie: Movie) => !fetchedMovieIds.current.has(movie.id));
+        newMovies.forEach((movie) => fetchedMovieIds.current.add(movie.id));
 
         setMovies((prevMovies) => [...prevMovies, ...newMovies]);
         setPage((prevPage) => prevPage + 1);

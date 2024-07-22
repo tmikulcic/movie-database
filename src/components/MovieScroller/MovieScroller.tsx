@@ -1,7 +1,9 @@
 'use client';
 
+import { type Movie } from '@/types/types';
+
 import { useRef } from 'react';
-import { Movie } from '@/types/types';
+
 import MovieItem from './MovieItem';
 import ArrowButton from './ArrowButton';
 
@@ -10,7 +12,7 @@ type MovieScrollerProps = {
   movieList: Movie[];
 };
 
-const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
+const MovieScroller: React.FC<MovieScrollerProps> = ({ title, movieList }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -38,7 +40,7 @@ const MovieScroller = ({ title, movieList }: MovieScrollerProps) => {
           ref={sliderRef}
           className='flex flex-col items-center md:items-start sm:flex-row w-full h-full overflow-x-scroll overflow-y-hidden scroll whitespace-nowrap scroll-smooth hide-scrollbar gap-4'
         >
-          {movieList.map((movie: any) => (
+          {movieList.map((movie) => (
             <MovieItem key={movie.id} movie={movie} />
           ))}
         </div>
