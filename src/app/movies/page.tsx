@@ -1,12 +1,12 @@
 'use client';
 
 import { type Movie } from '@/types/types';
-
 import { useState, useEffect, useRef, useCallback } from 'react';
-
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import MovieItem from '@/components/MovieScroller/MovieItem';
+import { fetchPopularMovies } from '@/lib/api';
 
-const API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
+const MAX_PAGES = 15;
 
 const MoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,26 +16,26 @@ const MoviesList = () => {
   const fetchedMovieIds = useRef(new Set());
 
   const fetchMovies = useCallback(async () => {
-    if (loading || !hasMore) return;
+    if (loading || !hasMore || page > MAX_PAGES) return;
 
     setLoading(true);
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`);
-      const data = await response.json();
+      const popularMovies = await fetchPopularMovies(page.toString());
 
-      if (Array.isArray(data.results)) {
-        const newMovies: Movie[] = data.results.filter((movie: Movie) => !fetchedMovieIds.current.has(movie.id));
+      if (Array.isArray(popularMovies.results)) {
+        const newMovies: Movie[] = popularMovies.results.filter((movie: Movie) => !fetchedMovieIds.current.has(movie.id));
         newMovies.forEach((movie) => fetchedMovieIds.current.add(movie.id));
 
         setMovies((prevMovies) => [...prevMovies, ...newMovies]);
+        setHasMore(page < popularMovies.total_pages && page < MAX_PAGES);
         setPage((prevPage) => prevPage + 1);
-        setHasMore(page < data.total_pages);
       } else {
-        console.error('Unexpected response format:', data);
+        console.log('No more popular movies to fetch:', popularMovies);
         setHasMore(false);
       }
     } catch (error) {
       console.error('Error fetching movies:', error);
+      setHasMore(false);
     } finally {
       setLoading(false);
     }
@@ -43,18 +43,9 @@ const MoviesList = () => {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100) {
-      fetchMovies();
-    }
   }, [fetchMovies]);
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+  useInfiniteScroll(fetchMovies, hasMore, loading);
 
   return (
     <main className='max-w-8xl mx-auto'>

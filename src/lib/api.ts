@@ -91,3 +91,8 @@ export const fetchLatestMovies = async (): Promise<Movie[]> => {
 
   return await Promise.all(moviePromises);
 };
+
+export const fetchPopularMovies = async (page: string) => {
+  const url = `${BASE_URL}/movie/popular?api_key=${NEXT_PUBLIC_MOVIE_API_KEY}&page=${page}`;
+  return await fetchData(url);
+};
